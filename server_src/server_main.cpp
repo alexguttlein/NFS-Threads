@@ -11,7 +11,6 @@ int main(int argc, char* argv[]) {
     }
 
     const char* port = argv[1];
-    std::cout << port << std::endl;
 
     Server server(port);
     server.run();
