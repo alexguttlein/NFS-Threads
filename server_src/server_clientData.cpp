@@ -6,10 +6,10 @@ ClientData::ClientData(int id, Socket&& socket)
       nitroTime(0) {}
 
 void ClientData::startThreads() {
-    senderThread = std::make_unique<SenderThread>(socket);
+    senderThread = std::make_unique<SenderThread>(&socket);
     senderThread->start();
 
-    receiverThread = std::make_unique<ReceiverThread>(socket);
+    receiverThread = std::make_unique<ReceiverThread>(&socket);
     receiverThread->start();
 }
 

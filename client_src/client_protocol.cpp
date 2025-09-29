@@ -1,8 +1,5 @@
 #include "client_protocol.h"
 
-#include <iostream>
-#include <ostream>
-
 ClientProtocol::ClientProtocol(Queue<std::string>& clientQueue,
     const char* host, const char* port) :
     clientQueue(clientQueue),
@@ -15,8 +12,9 @@ void ClientProtocol::run() {
 }
 
 void ClientProtocol::sendNitro() {
-    std::cout << "Sending Nitro command..." << std::endl;
-    clientQueue.push("nitro activado");
+    uint8_t msg = Constants::CLIENT_ACTIVATE_NITRO;
+    socket.sendall(&msg, sizeof(msg));
+    std::cout << "Nitro enviado" << std::endl;
 }
 
 void ClientProtocol::readMsg(int n) {

@@ -5,7 +5,6 @@
 #include "../common_src/common_socket.h"
 #include "server_acceptor.h"
 #include "server_monitorClients.h"
-#include "server_protocol.h"
 
 class Server {
 public:

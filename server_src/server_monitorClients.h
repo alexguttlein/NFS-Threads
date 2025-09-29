@@ -14,6 +14,7 @@ public:
     void insertClient(int id, ClientData&& client);
     void deleteClient(int id);
     void clear();
+    ClientData& getClient(int id);
 private:
     std::unordered_map<int, ClientData> clients;
     mutable std::mutex mtx;

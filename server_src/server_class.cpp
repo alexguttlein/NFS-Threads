@@ -20,7 +20,7 @@ void Server::run() {
 
     float time = 0;
     // gameloop
-    while (time < 10) {
+    while (time < 45) {
         std::this_thread::sleep_for(std::chrono::milliseconds(250));
         time += 0.25;
     }

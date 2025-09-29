@@ -13,7 +13,8 @@ void Client::run() {
     while (true) {
         std::getline(std::cin, input);
 
-        if (input == "exit") {
+
+        if (input == Constants::INPUT_EXIT) {
             protocol.run();
             break;
         }
@@ -22,10 +23,10 @@ void Client::run() {
         std::string command;
         iss >> command; // obtiene la primera palabra
 
-        if (command == "nitro") {
+        if (command == Constants::INPUT_NITRO) {
             protocol.sendNitro();
         }
-        else if (command == "read") {
+        else if (command == Constants::INPUT_READ) {
             int n;
             if (iss >> n) {
                 protocol.readMsg(n);
@@ -33,11 +34,11 @@ void Client::run() {
                 msg = clientQueue.pop();
                 std::cout << msg << std::endl;
             } else {
-                std::cout << "ERROR: Falta el número en read <n>" << std::endl;
+                std::cout << Constants::ERROR_READN << std::endl;
             }
         }
         else {
-            std::cout << "Comando desconocido: " << command << std::endl;
+            std::cout << Constants::ERROR_UNKNOWN_COMMAND << command << std::endl;
         }
     }
 }

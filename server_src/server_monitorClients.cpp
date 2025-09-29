@@ -21,3 +21,8 @@ void MonitorClients::clear() {
     }
     clients.clear();
 }
+
+ClientData& MonitorClients::getClient(int id) {
+    std::lock_guard<std::mutex> lock(mtx);
+    return clients.at(id); // lanza std::out_of_range si no existe
+}

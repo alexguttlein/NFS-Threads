@@ -6,11 +6,12 @@
 
 class ReceiverThread : public Thread {
 public:
-    ReceiverThread(Socket& socket);
+    ReceiverThread(Socket* socket);
     void run() override;
 private:
-    Socket& socket;
+    Socket* socket;
     bool keepRunning;
+    void receive();
 };
 
 #endif  // SERVER_RECEIVERTHREAD_H
