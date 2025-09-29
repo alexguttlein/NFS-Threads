@@ -6,8 +6,8 @@
 #include <unistd.h>
 
 Server::Server(const char* port) :
-    clients(),
-    acceptor(port, clients) {}
+    monitorClients(),
+    acceptor(port, monitorClients) {}
 
 void Server::run() {
     std::cout << "Server starting..." << std::endl;
@@ -16,7 +16,7 @@ void Server::run() {
     acceptor.start();
 
     int time = 0;
-    while (time < 5) {
+    while (time < 10) {
         sleep(1);
         time++;
     }
@@ -33,8 +33,5 @@ void Server::closeAcceptor() {
 }
 
 void Server::closeClients() {
-    for (auto& [id, client] : clients) {
-        client.shutdown();
-    }
-    clients.clear();
+    monitorClients.clear();
 }

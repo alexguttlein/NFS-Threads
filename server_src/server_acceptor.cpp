@@ -1,8 +1,8 @@
 #include "server_acceptor.h"
 
-Acceptor::Acceptor(const char* port, std::unordered_map<int, ClientData>& clients) :
+Acceptor::Acceptor(const char* port, MonitorClients& clients) :
     socket(port),
-    clients(clients),
+    monitorClients(clients),
     keepAccepting(true) {}
 
 void Acceptor::run() {
@@ -10,10 +10,11 @@ void Acceptor::run() {
     while (keepAccepting && !socket.is_stream_recv_closed()) {
         try {
             Socket newSocket = socket.accept();
-            ClientData cd{id, std::move(newSocket)};
-            clients.emplace(cd.id, std::move(cd));
+            ClientData newClient{id, std::move(newSocket)};
+            monitorClients.insertClient(id, newClient);
+            // clients.emplace(cd.id, std::move(cd));
             id++;
-            std::cout << "Server accepted new connection" << std::endl;
+            std::cout << "Acceptor::run -> Server accepted new connection" << std::endl;
         } catch (const std::exception& e) {
             if (keepAccepting) {
                 std::cerr << "Unexpected exception: " << e.what() << std::endl;

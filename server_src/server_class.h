@@ -1,12 +1,14 @@
 #ifndef SERVER_CLASS_H
 #define SERVER_CLASS_H
 
-#include "../common_src/common_socket.h"
+#include <unordered_map>
+
 #include "../common_src/common_clientData.h"
+#include "../common_src/common_socket.h"
+
+#include "MonitorClients.h"
 #include "server_acceptor.h"
 #include "server_protocol.h"
-
-#include <unordered_map>
 
 class Server {
 public:
@@ -14,7 +16,8 @@ public:
     void run();
 private:
     // ServerProtocol protocol;
-    std::unordered_map<int, ClientData> clients;
+    // std::unordered_map<int, ClientData> clients;
+    MonitorClients monitorClients;
     Acceptor acceptor;
     void closeAcceptor();
     void closeClients();

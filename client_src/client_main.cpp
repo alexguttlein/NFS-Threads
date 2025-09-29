@@ -14,8 +14,12 @@ int main(int argc, char* argv[]) {
     const char* host = argv[1];
     const char* port = argv[2];
 
-    Client client(host, port);
-    client.run();
+    try {
+        Client client(host, port);
+        client.run();
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 
     return Constants::SUCCESS;
 }
