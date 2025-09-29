@@ -1,8 +1,10 @@
 #include "server_acceptor.h"
 
-Acceptor::Acceptor(const char* port, MonitorClients& clients) :
+Acceptor::Acceptor(const char* port, MonitorClients& clients,
+    Queue<std::string>& queue) :
     socket(port),
     monitorClients(clients),
+    queue(queue),
     keepAccepting(true) {}
 
 void Acceptor::run() {
@@ -10,7 +12,7 @@ void Acceptor::run() {
     while (keepAccepting && !socket.is_stream_recv_closed()) {
         try {
             Socket newSocket = socket.accept();
-            ClientData newClient{id, std::move(newSocket)};
+            ClientData newClient{id, std::move(newSocket), queue};
 
             // se agrega el cliente a la lista de clientes
             monitorClients.insertClient(id, std::move(newClient));

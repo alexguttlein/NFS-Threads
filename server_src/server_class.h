@@ -3,6 +3,7 @@
 
 #include "server_clientData.h"
 #include "../common_src/common_socket.h"
+#include "../common_src/common_queue.h"
 #include "server_acceptor.h"
 #include "server_monitorClients.h"
 
@@ -11,9 +12,8 @@ public:
     Server(const char* port);
     void run();
 private:
-    // ServerProtocol protocol;
-    // std::unordered_map<int, ClientData> clients;
     MonitorClients monitorClients;
+    Queue<std::string> messagesQueue;
     Acceptor acceptor;
     void closeAcceptor();
     void closeClients();

@@ -1,16 +1,14 @@
 #include "server_receiverThread.h"
 
-#include "../common_src/common_constants.h"
-
-ReceiverThread::ReceiverThread(Socket* socket) :
-   socket(socket), keepRunning(true) {}
+ReceiverThread::ReceiverThread(Socket* socket, Queue<std::string>& queue) :
+   socket(socket), queue(queue), keepRunning(true) {}
 
 void ReceiverThread::run() {
     uint8_t msg;
     while (keepRunning && !socket->is_stream_recv_closed()) {
         socket->recvall(&msg, sizeof(msg));
         if (msg == Constants::CLIENT_ACTIVATE_NITRO) {
-            std::cout << "NITRO ON" << std::endl;
+            queue.try_push(Constants::MSG_NITRO_ON);
         }
         msg = ' ';
     }

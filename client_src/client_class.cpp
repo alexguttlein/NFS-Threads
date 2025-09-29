@@ -4,7 +4,7 @@
 #include <ostream>
 
 Client::Client(const char* host, const char* port) :
-    clientQueue(Constants::QUEUE_MAXSIZE),
+    clientQueue(Constants::CLIENT_QUEUE_MAXSIZE),
     protocol(clientQueue, host, port) { }
 
 void Client::run() {

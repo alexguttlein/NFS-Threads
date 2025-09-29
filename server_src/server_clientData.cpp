@@ -1,15 +1,14 @@
 #include "server_clientData.h"
 
-ClientData::ClientData(int id, Socket&& socket)
-    : id(id), socket(std::move(socket)),
-      senderThread(nullptr), receiverThread(nullptr),
-      nitroTime(0) {}
+ClientData::ClientData(int id, Socket&& socket, Queue<std::string>& queue)
+    : id(id), socket(std::move(socket)), serverQueue(queue) ,
+    senderThread(nullptr), receiverThread(nullptr), nitroTime(0) {}
 
 void ClientData::startThreads() {
     senderThread = std::make_unique<SenderThread>(&socket);
     senderThread->start();
 
-    receiverThread = std::make_unique<ReceiverThread>(&socket);
+    receiverThread = std::make_unique<ReceiverThread>(&socket, serverQueue);
     receiverThread->start();
 }
 

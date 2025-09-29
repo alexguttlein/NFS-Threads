@@ -10,7 +10,8 @@
 
 Server::Server(const char* port) :
     monitorClients(),
-    acceptor(port, monitorClients) {}
+    messagesQueue(Constants::SERVER_QUEUE_MAXSIZE),
+    acceptor(port, monitorClients, messagesQueue) {}
 
 void Server::run() {
     std::cout << "Server starting..." << std::endl;
@@ -20,10 +21,13 @@ void Server::run() {
 
     float time = 0;
     // gameloop
-    while (time < 45) {
+    while (time < 15) {
         std::this_thread::sleep_for(std::chrono::milliseconds(250));
         time += 0.25;
     }
+    std::string msg;
+    messagesQueue.try_pop(msg);
+    if (!msg.empty()) std::cout << "pop: " << msg << std::endl;
 
     closeAcceptor();
     closeClients();

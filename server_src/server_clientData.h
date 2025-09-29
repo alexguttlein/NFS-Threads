@@ -2,15 +2,17 @@
 #define SERVER_CLIENTDATA_H
 
 #include "../common_src/common_socket.h"
+#include "../common_src/common_queue.h"
+#include "../common_src/common_constants.h"
 #include "server_senderThread.h"
 #include "server_receiverThread.h"
-#include "../common_src/common_constants.h"
+
 
 #include <arpa/inet.h>
 
 class ClientData {
 public:
-    ClientData(int id, Socket&& socket);
+    ClientData(int id, Socket&& socket, Queue<std::string>& queue);
     void startThreads();
     void shutdown();
     void activateNitro();
@@ -22,6 +24,7 @@ public:
 private:
     int id;
     Socket socket;
+    Queue<std::string>& serverQueue;
     std::unique_ptr<SenderThread> senderThread;
     std::unique_ptr<ReceiverThread> receiverThread;
     int nitroTime;
