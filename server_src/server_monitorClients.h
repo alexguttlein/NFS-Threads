@@ -1,7 +1,7 @@
-#ifndef MONITORCLIENTS_H
-#define MONITORCLIENTS_H
+#ifndef SERVER_MONITORCLIENTS_H
+#define SERVER_MONITORCLIENTS_H
 
-#include "../common_src/common_clientData.h"
+#include "server_clientData.h"
 
 #include <condition_variable>
 #include <mutex>
@@ -11,7 +11,7 @@
 class MonitorClients {
 public:
     MonitorClients();
-    void insertClient(int id, ClientData& client);
+    void insertClient(int id, ClientData&& client);
     void deleteClient(int id);
     void clear();
 private:
@@ -19,4 +19,4 @@ private:
     mutable std::mutex mtx;
 };
 
-#endif  // MONITORCLIENTS_H
+#endif  // SERVER_MONITORCLIENTS_H

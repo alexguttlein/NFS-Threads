@@ -11,8 +11,10 @@ void Acceptor::run() {
         try {
             Socket newSocket = socket.accept();
             ClientData newClient{id, std::move(newSocket)};
-            monitorClients.insertClient(id, newClient);
-            // clients.emplace(cd.id, std::move(cd));
+            newClient.startThreads();
+
+            monitorClients.insertClient(id, std::move(newClient));
+
             id++;
             std::cout << "Acceptor::run -> Server accepted new connection" << std::endl;
         } catch (const std::exception& e) {

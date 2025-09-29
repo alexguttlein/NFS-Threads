@@ -1,8 +1,8 @@
-#include "MonitorClients.h"
+#include "server_monitorClients.h"
 
 MonitorClients::MonitorClients() : clients(0) {}
 
-void MonitorClients::insertClient(int id, ClientData& client) {
+void MonitorClients::insertClient(int id, ClientData&& client) {
     std::lock_guard<std::mutex> lock(mtx);
     clients.emplace(id, std::move(client));
 }

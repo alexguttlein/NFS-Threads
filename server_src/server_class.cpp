@@ -2,8 +2,11 @@
 
 #include <iostream>
 #include <ostream>
-
 #include <unistd.h>
+
+#include <chrono>
+#include <thread>
+
 
 Server::Server(const char* port) :
     monitorClients(),
@@ -15,10 +18,11 @@ void Server::run() {
     // se inicia el thread aceptador
     acceptor.start();
 
-    int time = 0;
+    float time = 0;
+    // gameloop
     while (time < 10) {
-        sleep(1);
-        time++;
+        std::this_thread::sleep_for(std::chrono::milliseconds(250));
+        time += 0.25;
     }
 
     closeAcceptor();

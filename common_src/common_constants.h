@@ -9,6 +9,7 @@ class Constants {
 public:
     static constexpr int SUCCESS = 0;
     static constexpr int ERROR = -1;
+    static constexpr int NITRO_TIME = 12;
     static const unsigned int QUEUE_MAXSIZE = 20;
 
     const char* INPUT_NITRO = "nitro";

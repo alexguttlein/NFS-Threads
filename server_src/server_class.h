@@ -1,13 +1,10 @@
 #ifndef SERVER_CLASS_H
 #define SERVER_CLASS_H
 
-#include <unordered_map>
-
-#include "../common_src/common_clientData.h"
+#include "server_clientData.h"
 #include "../common_src/common_socket.h"
-
-#include "MonitorClients.h"
 #include "server_acceptor.h"
+#include "server_monitorClients.h"
 #include "server_protocol.h"
 
 class Server {
