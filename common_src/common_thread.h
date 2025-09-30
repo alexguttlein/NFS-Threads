@@ -30,7 +30,7 @@ class Thread : public Runnable {
         }
 
     public:
-        Thread () : _keep_running(true), _is_alive(false) {}
+        Thread() : _keep_running(true), _is_alive(false) {}
 
         void start() override {
             _is_alive = true;

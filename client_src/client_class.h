@@ -11,7 +11,7 @@
 
 class Client {
 public:
-    Client(const char* port, const char* host);
+    Client(const char* host, const char* port);
     void run();
 private:
     Queue<std::string> clientQueue;

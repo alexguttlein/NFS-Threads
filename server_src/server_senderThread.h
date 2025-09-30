@@ -6,7 +6,7 @@
 
 class SenderThread : public Thread {
 public:
-    SenderThread(Socket* socket);
+    explicit SenderThread(Socket* socket);
     void run() override;
 private:
     Socket* socket;

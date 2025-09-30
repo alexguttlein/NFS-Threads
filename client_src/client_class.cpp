@@ -25,8 +25,7 @@ void Client::run() {
 
         if (command == Constants::INPUT_NITRO) {
             protocol.sendNitro();
-        }
-        else if (command == Constants::INPUT_READ) {
+        } else if (command == Constants::INPUT_READ) {
             int n;
             if (iss >> n) {
                 protocol.readMsg(n);
@@ -36,8 +35,7 @@ void Client::run() {
             } else {
                 std::cout << Constants::ERROR_READN << std::endl;
             }
-        }
-        else {
+        } else {
             std::cout << Constants::ERROR_UNKNOWN_COMMAND << command << std::endl;
         }
     }

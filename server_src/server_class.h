@@ -11,10 +11,11 @@
 #include <iostream>
 #include <ostream>
 #include <unistd.h>
+#include <string>
 
 class Server {
 public:
-    Server(const char* port);
+    explicit Server(const char* port);
     void run();
 private:
     MonitorClients monitorClients;

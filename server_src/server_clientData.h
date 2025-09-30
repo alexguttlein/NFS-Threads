@@ -7,8 +7,10 @@
 #include "server_senderThread.h"
 #include "server_receiverThread.h"
 
-
 #include <arpa/inet.h>
+#include <memory>
+#include <string>
+#include <utility>
 
 class ClientData {
 public:

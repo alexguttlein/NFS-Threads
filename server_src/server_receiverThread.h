@@ -6,6 +6,8 @@
 #include "../common_src/common_constants.h"
 #include "../common_src/common_queue.h"
 
+#include <string>
+
 class ReceiverThread : public Thread {
 public:
     // ReceiverThread(Socket* socket);
