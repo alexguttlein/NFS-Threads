@@ -1,34 +1,25 @@
 #include "server_class.h"
 
-#include <iostream>
-#include <ostream>
-#include <unistd.h>
-
-#include <chrono>
-#include <thread>
-
-
 Server::Server(const char* port) :
     monitorClients(),
     messagesQueue(Constants::SERVER_QUEUE_MAXSIZE),
-    acceptor(port, monitorClients, messagesQueue) {}
+    acceptor(port, monitorClients, messagesQueue),
+    gameloop(messagesQueue, monitorClients) {}
 
 void Server::run() {
     std::cout << "Server starting..." << std::endl;
 
     // se inicia el thread aceptador
     acceptor.start();
+    gameloop.start();
 
-    float time = 0;
-    // gameloop
-    while (time < 15) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(250));
-        time += 0.25;
+    std::string end;
+    while (true) {
+        std::getline(std::cin, end);
+        if (end == "q") break;
     }
-    std::string msg;
-    messagesQueue.try_pop(msg);
-    if (!msg.empty()) std::cout << "pop: " << msg << std::endl;
 
+    closeGameLoop();
     closeAcceptor();
     closeClients();
 
@@ -42,4 +33,9 @@ void Server::closeAcceptor() {
 
 void Server::closeClients() {
     monitorClients.clear();
+}
+
+void Server::closeGameLoop() {
+    gameloop.stop();
+    gameloop.join();
 }

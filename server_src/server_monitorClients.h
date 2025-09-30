@@ -7,6 +7,7 @@
 #include <mutex>
 #include <unordered_map>
 #include <iostream>
+#include <functional>
 
 class MonitorClients {
 public:
@@ -15,6 +16,7 @@ public:
     void deleteClient(int id);
     void clear();
     ClientData& getClient(int id);
+    void forEachClient(const std::function<void(ClientData&)>& func);
 private:
     std::unordered_map<int, ClientData> clients;
     mutable std::mutex mtx;

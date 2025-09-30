@@ -8,7 +8,7 @@ void ClientData::startThreads() {
     senderThread = std::make_unique<SenderThread>(&socket);
     senderThread->start();
 
-    receiverThread = std::make_unique<ReceiverThread>(&socket, serverQueue);
+    receiverThread = std::make_unique<ReceiverThread>(&socket, serverQueue, nitroTime);
     receiverThread->start();
 }
 
@@ -17,13 +17,13 @@ void ClientData::shutdown() {
     socket.close();
 
     if (senderThread) {
-        std::cout << "SenderThread disconnected" << std::endl;
+        // std::cout << "DEBUG: SenderThread disconnected" << std::endl;
         senderThread->join();
         senderThread = nullptr;
     }
 
     if (receiverThread) {
-        std::cout << "ReceiverThread disconnected" << std::endl;
+        // std::cout << "DEBUG: ReceiverThread disconnected" << std::endl;
         receiverThread->join();
         receiverThread = nullptr;
     }
@@ -31,7 +31,7 @@ void ClientData::shutdown() {
 
 void ClientData::activateNitro() {
     if (nitroTime == 0) {
-        nitroTime = Constants::NITRO_TIME;
+        nitroTime = Constants::NITRO_TIME_ITERATIONS;
     }
 }
 

@@ -9,13 +9,13 @@
 class ReceiverThread : public Thread {
 public:
     // ReceiverThread(Socket* socket);
-    ReceiverThread(Socket* socket, Queue<std::string>& queue);
+    ReceiverThread(Socket* socket, Queue<std::string>& queue, int& time);
     void run() override;
 private:
     Socket* socket;
     Queue<std::string>& queue;
     bool keepRunning;
-    void receive();
+    int& time;
 };
 
 #endif  // SERVER_RECEIVERTHREAD_H

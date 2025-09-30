@@ -14,9 +14,9 @@ void MonitorClients::deleteClient(int id) {
 
 void MonitorClients::clear() {
     std::lock_guard<std::mutex> lock(mtx);
-    std::cout << "Limpiando monitor..." << std::endl;
+    // std::cout << "DEBUG: Limpiando monitor..." << std::endl;
     for (auto& [id, client] : clients) {
-        std::cout << "Eliminando cliente: " << id << std::endl;
+        // std::cout << "DEBUG: Eliminando cliente: " << id << std::endl;
         client.shutdown();
     }
     clients.clear();
@@ -24,5 +24,12 @@ void MonitorClients::clear() {
 
 ClientData& MonitorClients::getClient(int id) {
     std::lock_guard<std::mutex> lock(mtx);
-    return clients.at(id); // lanza std::out_of_range si no existe
+    return clients.at(id);
+}
+
+void MonitorClients::forEachClient(const std::function<void(ClientData&)>& func) {
+    std::lock_guard<std::mutex> lock(mtx);
+    for (auto& [id, client] : clients) {
+        func(client);
+    }
 }

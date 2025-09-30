@@ -10,7 +10,7 @@ namespace  Constants {
     static constexpr int ERROR = -1;
 
     // constantes de valores enteros
-    static constexpr int NITRO_TIME = 12;
+    static constexpr float NITRO_TIME_ITERATIONS = 12;
     static const unsigned int CLIENT_QUEUE_MAXSIZE = 20;
     static const unsigned int SERVER_QUEUE_MAXSIZE = 50;
 
