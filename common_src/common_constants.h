@@ -33,6 +33,6 @@ namespace  Constants {
     static const std::string ERROR_READN = "ERROR: Falta el número en read <n>";
     static const std::string ERROR_UNKNOWN_COMMAND = "Error: Comando desconocido: ";
 
-};
+}
 
 #endif // COMMON_CONSTANTS_H
