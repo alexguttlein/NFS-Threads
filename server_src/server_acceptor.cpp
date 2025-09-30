@@ -22,7 +22,7 @@ void Acceptor::run() {
             clientInMap.startThreads();
 
             id++;
-            std::cout << "Acceptor::run -> Server accepted new connection" << std::endl;
+            // std::cout << "DEBUG: Acceptor::run -> Server accepted new connection" << std::endl;
         } catch (const std::exception& e) {
             if (keepAccepting) {
                 std::cerr << "Unexpected exception: " << e.what() << std::endl;

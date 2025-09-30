@@ -13,5 +13,5 @@ void ReceiverThread::run() {
         }
         msg = ' ';
     }
-    std::cout << "ReceiverThread::run() -> SENDER CERRADO" << std::endl;
+    // std::cout << "DEBUG: ReceiverThread::run() -> SENDER CERRADO" << std::endl;
 }

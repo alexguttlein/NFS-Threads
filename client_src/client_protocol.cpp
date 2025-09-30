@@ -7,18 +7,18 @@ ClientProtocol::ClientProtocol(Queue<std::string>& clientQueue,
     isClosed(false) {}
 
 void ClientProtocol::run() {
-    std::cout << "Running protocol..." << std::endl;
+    // std::cout << "DEBUG: Running protocol..." << std::endl;
     close();
 }
 
 void ClientProtocol::sendNitro() {
     uint8_t msg = Constants::CLIENT_ACTIVATE_NITRO;
     socket.sendall(&msg, sizeof(msg));
-    std::cout << "Nitro enviado" << std::endl;
+    // std::cout << "DEBUG: Nitro enviado" << std::endl;
 }
 
 void ClientProtocol::readMsg(int n) {
-    std::cout << "Reading " << n << std::endl;
+    // std::cout << "DEBUG: Reading " << n << std::endl;
 }
 
 void ClientProtocol::handleServerMessage(const std::string& msg) {
@@ -26,7 +26,7 @@ void ClientProtocol::handleServerMessage(const std::string& msg) {
 }
 
 void ClientProtocol::close() {
-    std::cout << "Closing client socket..." << std::endl;
+    // std::cout << "DEBUG: Closing client socket..." << std::endl;
     if (!socket.is_stream_recv_closed()) {
         this->socket.shutdown(SHUT_RDWR);
         this->socket.close();
