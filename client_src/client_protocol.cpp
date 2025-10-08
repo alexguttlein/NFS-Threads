@@ -6,11 +6,6 @@ ClientProtocol::ClientProtocol(Queue<std::string>& clientQueue,
     socket(host, port),
     isClosed(false) {}
 
-void ClientProtocol::run() {
-    // std::cout << "DEBUG: Running protocol..." << std::endl;
-    close();
-}
-
 void ClientProtocol::sendNitro() {
     uint8_t msg = Constants::CLIENT_ACTIVATE_NITRO;
     socket.sendall(&msg, sizeof(msg));
@@ -19,10 +14,20 @@ void ClientProtocol::sendNitro() {
 
 void ClientProtocol::readMsg(int n) {
     // std::cout << "DEBUG: Reading " << n << std::endl;
-}
+    uint8_t msg;
+    std::string msgQueue;
+    for (int i = 0; i < n; i++) {
+        if (socket.is_stream_recv_closed() || socket.is_stream_send_closed())
+            return;
+        socket.recvall(&msg, sizeof(msg));
 
-void ClientProtocol::handleServerMessage(const std::string& msg) {
-    clientQueue.push(msg);
+        if (msg == Constants::SERVER_NITRO_ACTIVATE) {
+            msgQueue = Constants::MSG_NITRO_ON;
+        } else if (msg == Constants::SERVER_NITRO_EXPIRED) {
+            msgQueue = Constants::MSG_NITRO_OFF;
+        }
+        clientQueue.push(msgQueue);
+    }
 }
 
 void ClientProtocol::close() {

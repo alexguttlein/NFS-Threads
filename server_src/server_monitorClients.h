@@ -18,6 +18,9 @@ public:
     void clear();
     ClientData& getClient(int id);
     void forEachClient(const std::function<void(ClientData&)>& func);
+    void forClient(int id, const std::function<void(ClientData&)>& func);
+    void broadcastToAllClients(const uint8_t& msg);
+
 private:
     std::unordered_map<int, ClientData> clients;
     mutable std::mutex mtx;

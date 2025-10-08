@@ -22,6 +22,7 @@ public:
 
     int getId() const { return id; }
     int getNitroTime() const { return nitroTime; }
+    void enqueueMessage(const uint8_t& msg);
 
 private:
     int id;
@@ -30,6 +31,7 @@ private:
     std::unique_ptr<SenderThread> senderThread;
     std::unique_ptr<ReceiverThread> receiverThread;
     int nitroTime;
+    std::unique_ptr<Queue<uint8_t>> clientQueue;
 };
 
 #endif  // SERVER_CLIENTDATA_H

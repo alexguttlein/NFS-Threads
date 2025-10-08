@@ -18,8 +18,11 @@ void Acceptor::run() {
             monitorClients.insertClient(id, std::move(newClient));
 
             //se busca al cliente y se inicializan los threads
-            ClientData& clientInMap = monitorClients.getClient(id);
-            clientInMap.startThreads();
+            // ClientData& clientInMap = monitorClients.getClient(id);
+            // clientInMap.startThreads();
+            monitorClients.forClient(id, [](ClientData& c) {
+                c.startThreads();
+            });
 
             id++;
             // std::cout << "DEBUG: Acceptor::run -> Server accepted new connection" << std::endl;

@@ -9,16 +9,17 @@ void GameLoop::run() {
     while (running) {
         // si hay algo en la queue lo procesa
         std::string msg;
-        if (queue.try_pop(msg)) {
-            // broadcastToAllClients(Constants::msg);
+        while (queue.try_pop(msg)) {
+            clients.broadcastToAllClients(Constants::SERVER_NITRO_ACTIVATE);
             std::cout << msg << std::endl;
         }
 
         // si se terminó el nitro de un auto se envia a los clientes
-        clients.forEachClient([](ClientData& client) {
+        clients.forEachClient([this](ClientData& client) {
                 if (client.nitroEnded()) {
-                    // broadcastToAllClients(Constants::MSG_NITRO_OFF)
                     std::cout << Constants::MSG_NITRO_OFF << std::endl;
+                    clients.broadcastToAllClients(Constants::SERVER_NITRO_EXPIRED);
+
                 }
         });
 

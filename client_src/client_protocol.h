@@ -15,15 +15,15 @@ class ClientProtocol {
 public:
     ClientProtocol(Queue<std::string>& clientQueue,
         const char* host, const char* port);
-    void run();
+    // void run();
     void sendNitro();
     void readMsg(int n);
     void handleServerMessage(const std::string& msg);
+    void close();
 private:
     Queue<std::string>& clientQueue;
     Socket socket;
     bool isClosed;
-    void close();
 };
 
 #endif  // CLIENT_PROTOCOL_H

@@ -13,9 +13,8 @@ void Client::run() {
     while (true) {
         std::getline(std::cin, input);
 
-
         if (input == Constants::INPUT_EXIT) {
-            protocol.run();
+            protocol.close();
             break;
         }
 
@@ -30,8 +29,10 @@ void Client::run() {
             if (iss >> n) {
                 protocol.readMsg(n);
                 std::string msg;
-                msg = clientQueue.pop();
-                std::cout << msg << std::endl;
+                for (int i = 0; i < n; i++) {
+                    msg = clientQueue.pop();
+                    std::cout << msg << std::endl;
+                }
             } else {
                 std::cout << Constants::ERROR_READN << std::endl;
             }

@@ -11,6 +11,8 @@ void Server::run() {
 
     // se inicia el thread aceptador
     acceptor.start();
+
+    // se inicia el gameloop
     gameloop.start();
 
     std::string end;
