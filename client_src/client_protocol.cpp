@@ -9,11 +9,9 @@ ClientProtocol::ClientProtocol(Queue<std::string>& clientQueue,
 void ClientProtocol::sendNitro() {
     uint8_t msg = Constants::CLIENT_ACTIVATE_NITRO;
     socket.sendall(&msg, sizeof(msg));
-    // std::cout << "DEBUG: Nitro enviado" << std::endl;
 }
 
 void ClientProtocol::readMsg(int n) {
-    // std::cout << "DEBUG: Reading " << n << std::endl;
     uint8_t msg;
     std::string msgQueue;
     for (int i = 0; i < n; i++) {
@@ -31,7 +29,6 @@ void ClientProtocol::readMsg(int n) {
 }
 
 void ClientProtocol::close() {
-    // std::cout << "DEBUG: Closing client socket..." << std::endl;
     if (!socket.is_stream_recv_closed()) {
         this->socket.shutdown(SHUT_RDWR);
         this->socket.close();

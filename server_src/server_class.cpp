@@ -7,7 +7,6 @@ Server::Server(const char* port) :
     gameloop(messagesQueue, monitorClients) {}
 
 void Server::run() {
-    // std::cout << "DEBUG: Server starting..." << std::endl;
 
     // se inicia el thread aceptador
     acceptor.start();
@@ -25,7 +24,6 @@ void Server::run() {
     closeAcceptor();
     closeClients();
 
-    // std::cout << "DEBUG: Server ending..." << std::endl;
 }
 
 void Server::closeAcceptor() {

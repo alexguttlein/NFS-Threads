@@ -25,7 +25,6 @@ void Acceptor::run() {
             });
 
             id++;
-            // std::cout << "DEBUG: Acceptor::run -> Server accepted new connection" << std::endl;
         } catch (const std::exception& e) {
             if (keepAccepting) {
                 std::cerr << "Unexpected exception: " << e.what() << std::endl;

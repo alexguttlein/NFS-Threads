@@ -20,13 +20,11 @@ void ClientData::shutdown() {
     clientQueue->close();
 
     if (senderThread) {
-        // std::cout << "DEBUG: SenderThread disconnected" << std::endl;
         senderThread->join();
         senderThread = nullptr;
     }
 
     if (receiverThread) {
-        // std::cout << "DEBUG: ReceiverThread disconnected" << std::endl;
         receiverThread->join();
         receiverThread = nullptr;
     }
