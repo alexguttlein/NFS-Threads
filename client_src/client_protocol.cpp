@@ -12,16 +12,19 @@ void ClientProtocol::sendNitro() {
 }
 
 void ClientProtocol::readMsg(int n) {
-    uint8_t msg;
+    Msg msg;
+
     std::string msgQueue;
     for (int i = 0; i < n; i++) {
         if (socket.is_stream_recv_closed() || socket.is_stream_send_closed())
             return;
         socket.recvall(&msg, sizeof(msg));
 
-        if (msg == Constants::SERVER_NITRO_ACTIVATE) {
+        msg.quantity = ntohs(msg.quantity);
+
+        if (msg.type == Constants::SERVER_NITRO_ACTIVATE) {
             msgQueue = Constants::MSG_NITRO_ON;
-        } else if (msg == Constants::SERVER_NITRO_EXPIRED) {
+        } else if (msg.type == Constants::SERVER_NITRO_EXPIRED) {
             msgQueue = Constants::MSG_NITRO_OFF;
         }
         clientQueue.push(msgQueue);

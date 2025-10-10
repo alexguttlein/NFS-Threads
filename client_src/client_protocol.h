@@ -4,6 +4,7 @@
 #include "../common_src/common_queue.h"
 #include "../common_src/common_socket.h"
 #include "../common_src/common_constants.h"
+#include "../common_src/common_message.h"
 
 #include <string>
 #include <cstdint>

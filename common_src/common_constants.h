@@ -28,6 +28,7 @@ namespace  Constants {
     static constexpr unsigned char SERVER_NITRO_ACTIVATE = 0x07;
     static constexpr unsigned char SERVER_NITRO_EXPIRED = 0x08;
     static constexpr unsigned char SERVER_RESPONSE = 0x10;
+    static constexpr unsigned char DEFAULT_MESSAGE_CODE = 0x00;
 
     // constantes de errores
     static const std::string ERROR_READN = "ERROR: Falta el número en read <n>";

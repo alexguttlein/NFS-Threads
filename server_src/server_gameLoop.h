@@ -3,6 +3,7 @@
 
 #include "../common_src/common_queue.h"
 #include "../common_src/common_thread.h"
+#include "../common_src/common_message.h"
 #include "server_monitorClients.h"
 #include <string>
 #include <chrono>

@@ -2,6 +2,7 @@
 #define SERVER_MONITORCLIENTS_H
 
 #include "server_clientData.h"
+#include "../common_src/common_message.h"
 
 #include <condition_variable>
 #include <mutex>
@@ -19,7 +20,8 @@ public:
     ClientData& getClient(int id);
     void forEachClient(const std::function<void(ClientData&)>& func);
     void forClient(int id, const std::function<void(ClientData&)>& func);
-    void broadcastToAllClients(const uint8_t& msg);
+    void broadcastToAllClients(const Msg& msg);
+    void killDisconnectedClients();
 
 private:
     std::unordered_map<int, ClientData> clients;

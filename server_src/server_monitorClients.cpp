@@ -37,9 +37,21 @@ void MonitorClients::forClient(int id, const std::function<void(ClientData&)>& f
     func(clients.at(id));
 }
 
-void MonitorClients::broadcastToAllClients(const uint8_t& msg) {
+void MonitorClients::broadcastToAllClients(const Msg& msg) {
     std::lock_guard<std::mutex> lock(mtx);
     for (auto& [id, client] : clients) {
         client.enqueueMessage(msg);
+    }
+}
+
+void MonitorClients::killDisconnectedClients() {
+    std::lock_guard<std::mutex> lock(mtx);
+    for (auto it = clients.begin(); it != clients.end();) {
+        if (!it->second.isConnected()) {
+            it->second.shutdown();
+            it = clients.erase(it);
+        } else {
+            ++it;
+        }
     }
 }

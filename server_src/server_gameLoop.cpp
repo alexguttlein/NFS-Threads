@@ -5,21 +5,32 @@ GameLoop::GameLoop(Queue<std::string>& queue, MonitorClients& clients)
 
 void GameLoop::run() {
     running = true;
+    int nitrosActivated = 0;
 
     while (running) {
+        clients.killDisconnectedClients();
         // si hay algo en la queue lo procesa
-        std::string msg;
-        while (queue.try_pop(msg)) {
-            clients.broadcastToAllClients(Constants::SERVER_NITRO_ACTIVATE);
-            std::cout << msg << std::endl;
+        std::string queueMsg;
+        while (queue.try_pop(queueMsg)) {
+            Message msgToBroadcast(Constants::SERVER_RESPONSE);
+
+            nitrosActivated++;
+            msgToBroadcast.addParameters(nitrosActivated, Constants::SERVER_NITRO_ACTIVATE);
+
+            clients.broadcastToAllClients(msgToBroadcast.getMessage());
+            std::cout << queueMsg << std::endl;
         }
 
         // si se terminó el nitro de un auto se envia a los clientes
-        clients.forEachClient([this](ClientData& client) {
+        clients.forEachClient([this, &nitrosActivated](ClientData& client) {
                 if (client.nitroEnded()) {
-                    std::cout << Constants::MSG_NITRO_OFF << std::endl;
-                    clients.broadcastToAllClients(Constants::SERVER_NITRO_EXPIRED);
+                    Message msgToBroadcast(Constants::SERVER_RESPONSE);
+                    msgToBroadcast.addParameters(nitrosActivated,
+                        Constants::SERVER_NITRO_EXPIRED);
+                    nitrosActivated--;
 
+                    clients.broadcastToAllClients(msgToBroadcast.getMessage());
+                    std::cout << Constants::MSG_NITRO_OFF << std::endl;
                 }
         });
 
