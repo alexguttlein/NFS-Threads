@@ -24,10 +24,11 @@ void GameLoop::run() {
         // si se terminó el nitro de un auto se envia a los clientes
         clients.forEachClient([this, &nitrosActivated](ClientData& client) {
                 if (client.nitroEnded()) {
+                    nitrosActivated--;
+                    
                     Message msgToBroadcast(Constants::SERVER_RESPONSE);
                     msgToBroadcast.addParameters(nitrosActivated,
                         Constants::SERVER_NITRO_EXPIRED);
-                    nitrosActivated--;
 
                     clients.broadcastToAllClients(msgToBroadcast.getMessage());
                     std::cout << Constants::MSG_NITRO_OFF << std::endl;

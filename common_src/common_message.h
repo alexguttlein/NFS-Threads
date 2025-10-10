@@ -5,11 +5,13 @@
 #include <cstdint>
 #include <arpa/inet.h>
 
+#pragma pack(push, 1)
 struct Msg {
     uint8_t code;
     uint16_t quantity;
     uint8_t type;
 };
+#pragma pack(pop)
 
 class Message {
 public:
