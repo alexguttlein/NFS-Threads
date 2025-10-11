@@ -1,7 +1,7 @@
 #include "server_senderThread.h"
 
-SenderThread::SenderThread(Socket* socket, Queue<Message>* clientQueue) :
-    socket(socket), keepRunning(true), clientQueue(clientQueue) {}
+SenderThread::SenderThread(ServerProtocol* serverProtocol, Queue<Message>* clientQueue) :
+    serverProtocol(serverProtocol), keepRunning(true), clientQueue(clientQueue) {}
 
 void SenderThread::run() {
     try {
@@ -9,11 +9,13 @@ void SenderThread::run() {
             Message msg = clientQueue->pop();
 
             // se verifica si el socket está cerrado antes de enviar
-            if (socket->is_stream_send_closed() || socket->is_stream_recv_closed()) {
+            if (serverProtocol->isConnectionClosed()) {
                 keepRunning = false;
                 break;
             }
-            socket->sendall(&msg, sizeof(msg));
+
+            serverProtocol->sendMessage(msg);
+            // socket->sendall(&msg, sizeof(msg));
         }
     } catch (const ClosedQueue& e) {
         // std::cerr << "SenderThread ClosedQueue: " << e.what() << std::endl;

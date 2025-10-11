@@ -5,14 +5,15 @@
 #include "../common_src/common_queue.h"
 #include "../common_src/common_socket.h"
 #include "../common_src/common_thread.h"
+#include "server_protocol.h"
 
 class SenderThread : public Thread {
 public:
-    SenderThread(Socket* socket, Queue<Message>* clientQueue);
+    SenderThread(ServerProtocol* serverProtocol, Queue<Message>* clientQueue);
     void run() override;
 
 private:
-    Socket* socket;
+    ServerProtocol* serverProtocol;
     bool keepRunning;
     Queue<Message>* clientQueue;
 };

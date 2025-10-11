@@ -14,6 +14,7 @@
 
 #include "server_receiverThread.h"
 #include "server_senderThread.h"
+#include "server_protocol.h"
 
 class ClientData {
 public:
@@ -30,7 +31,7 @@ public:
 
 private:
     int id;
-    Socket socket;
+    ServerProtocol serverProtocol;
     Queue<std::string>& serverQueue;
     std::unique_ptr<SenderThread> senderThread;
     std::unique_ptr<ReceiverThread> receiverThread;
