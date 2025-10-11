@@ -1,12 +1,12 @@
 #include "server_senderThread.h"
 
-SenderThread::SenderThread(Socket* socket, Queue<Msg>* clientQueue) :
+SenderThread::SenderThread(Socket* socket, Queue<Message>* clientQueue) :
     socket(socket), keepRunning(true), clientQueue(clientQueue) {}
 
 void SenderThread::run() {
     try {
         while (keepRunning) {
-            Msg msg = clientQueue->pop();
+            Message msg = clientQueue->pop();
 
             // se verifica si el socket está cerrado antes de enviar
             if (socket->is_stream_send_closed() || socket->is_stream_recv_closed()) {

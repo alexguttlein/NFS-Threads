@@ -1,17 +1,19 @@
 #ifndef SERVER_CLIENTDATA_H
 #define SERVER_CLIENTDATA_H
 
-#include "../common_src/common_socket.h"
-#include "../common_src/common_queue.h"
-#include "../common_src/common_constants.h"
-#include "../common_src/common_message.h"
-#include "server_senderThread.h"
-#include "server_receiverThread.h"
-
-#include <arpa/inet.h>
 #include <memory>
 #include <string>
 #include <utility>
+
+#include <arpa/inet.h>
+
+#include "../common_src/common_constants.h"
+#include "../common_src/common_messageBuilder.h"
+#include "../common_src/common_queue.h"
+#include "../common_src/common_socket.h"
+
+#include "server_receiverThread.h"
+#include "server_senderThread.h"
 
 class ClientData {
 public:
@@ -23,7 +25,7 @@ public:
 
     int getId() const { return id; }
     int getNitroTime() const { return nitroTime; }
-    void enqueueMessage(const Msg& msg);
+    void enqueueMessage(const Message& msg);
     bool isConnected() const;
 
 private:
@@ -33,7 +35,7 @@ private:
     std::unique_ptr<SenderThread> senderThread;
     std::unique_ptr<ReceiverThread> receiverThread;
     int nitroTime;
-    std::unique_ptr<Queue<Msg>> clientQueue;
+    std::unique_ptr<Queue<Message>> clientQueue;
 };
 
 #endif  // SERVER_CLIENTDATA_H

@@ -3,7 +3,7 @@
 
 #include "../common_src/common_queue.h"
 #include "../common_src/common_thread.h"
-#include "../common_src/common_message.h"
+#include "../common_src/common_messageBuilder.h"
 #include "server_monitorClients.h"
 #include <string>
 #include <chrono>
@@ -12,6 +12,8 @@
 class GameLoop : public Thread {
 public:
     GameLoop(Queue<std::string>& queue, MonitorClients& clients);
+    void checkNitroExpirationAndBroadcast(int& nitrosActivated);
+    void unqueueAndBroadcastMsg(int& nitrosActivated);
     void stop() override;
 private:
     Queue<std::string>& queue;

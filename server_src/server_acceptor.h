@@ -16,6 +16,7 @@ class Acceptor : public Thread {
 public:
     Acceptor(const char* port, MonitorClients& monitor_clients,
         Queue<std::string>& queue);
+    void addNewClient(int id, ClientData newClient);
     void run() override;
     void endAccepting();
 private:

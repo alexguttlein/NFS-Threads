@@ -12,6 +12,7 @@
 class Client {
 public:
     Client(const char* host, const char* port);
+    void processInput(std::string input);
     void run();
 private:
     Queue<std::string> clientQueue;

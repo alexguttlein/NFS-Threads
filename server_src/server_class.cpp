@@ -20,10 +20,10 @@ void Server::run() {
         if (end == "q") break;
     }
 
+    // se finalizan hilos
     closeGameLoop();
     closeAcceptor();
     closeClients();
-
 }
 
 void Server::closeAcceptor() {

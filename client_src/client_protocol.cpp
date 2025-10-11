@@ -12,7 +12,7 @@ void ClientProtocol::sendNitro() {
 }
 
 void ClientProtocol::readMsg(int n) {
-    Msg msg;
+    Message msg;
 
     std::string msgQueue;
     for (int i = 0; i < n; i++) {

@@ -1,10 +1,10 @@
 #include "server_clientData.h"
 #include "../common_src/common_liberror.h"
 
-ClientData::ClientData(int id, Socket&& socket, Queue<std::string>& queue)
-    : id(id), socket(std::move(socket)), serverQueue(queue) ,
+ClientData::ClientData(int id, Socket&& socket, Queue<std::string>& queue) :
+    id(id), socket(std::move(socket)), serverQueue(queue) ,
     senderThread(nullptr), receiverThread(nullptr), nitroTime(0),
-    clientQueue(std::make_unique<Queue<Msg>>(Constants::CLIENT_QUEUE_MAXSIZE)) {}
+    clientQueue(std::make_unique<Queue<Message>>(Constants::CLIENT_QUEUE_MAXSIZE)) {}
 
 void ClientData::startThreads() {
     senderThread = std::make_unique<SenderThread>(&socket, clientQueue.get());
@@ -56,7 +56,7 @@ bool ClientData::nitroEnded() {
     return nitroTime == 0;
 }
 
-void ClientData::enqueueMessage(const Msg& msg) {
+void ClientData::enqueueMessage(const Message& msg) {
     clientQueue->try_push(msg);
 }
 
