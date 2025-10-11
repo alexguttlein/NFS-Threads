@@ -15,8 +15,7 @@ void Server::run() {
     gameloop.start();
 
     std::string end;
-    while (true) {
-        std::getline(std::cin, end);
+    while (std::getline(std::cin, end)) {
         if (end == "q") break;
     }
 

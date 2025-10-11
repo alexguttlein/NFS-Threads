@@ -10,8 +10,7 @@ Client::Client(const char* host, const char* port) :
 void Client::run() {
     std::string input;
 
-    while (true) {
-        std::getline(std::cin, input);
+    while (std::getline(std::cin, input)) {
 
         if (input == Constants::INPUT_EXIT) {
             protocol.close();
