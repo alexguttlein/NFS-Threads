@@ -1,13 +1,14 @@
 #ifndef CLIENT_CLASS_H
 #define CLIENT_CLASS_H
 
-#include "../common_src/common_queue.h"
-#include "../common_src/common_constants.h"
-#include "client_protocol.h"
-
 #include <iostream>
-#include <string>
 #include <sstream>
+#include <string>
+
+#include "../common_src/common_constants.h"
+#include "../common_src/common_queue.h"
+#include "client_commandDispatcher.h"
+#include "client_protocol.h"
 
 class Client {
 public:
@@ -17,6 +18,8 @@ public:
 private:
     Queue<std::string> clientQueue;
     ClientProtocol protocol;
+    CommandDispatcher dispatcher;
+    void registerCommands();
 };
 
 #endif  //CLIENT_CLASS_H

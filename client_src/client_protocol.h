@@ -19,7 +19,8 @@ public:
         const char* host, const char* port);
     void sendNitro();
     void readMsg(int n);
-    void close();
+    ~ClientProtocol();
+
 private:
     Queue<std::string>& clientQueue;
     Socket socket;
