@@ -23,7 +23,6 @@ public:
     void shutdown();
     void activateNitro();
     bool nitroEnded();
-
     int getId() const { return id; }
     int getNitroTime() const { return nitroTime; }
     void enqueueMessage(const Message& msg);

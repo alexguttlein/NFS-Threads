@@ -4,25 +4,17 @@ Server::Server(const char* port) :
     monitorClients(),
     messagesQueue(Constants::SERVER_QUEUE_MAXSIZE),
     acceptor(port, monitorClients, messagesQueue),
-    gameloop(messagesQueue, monitorClients) {}
+    gameloop(messagesQueue, monitorClients) {
+
+    acceptor.start();
+    gameloop.start();
+}
 
 void Server::run() {
-
-    // se inicia el thread aceptador
-    acceptor.start();
-
-    // se inicia el gameloop
-    gameloop.start();
-
     std::string end;
     while (std::getline(std::cin, end)) {
         if (end == "q") break;
     }
-
-    // se finalizan hilos
-    closeGameLoop();
-    closeAcceptor();
-    closeClients();
 }
 
 void Server::closeAcceptor() {
@@ -37,4 +29,10 @@ void Server::closeClients() {
 void Server::closeGameLoop() {
     gameloop.stop();
     gameloop.join();
+}
+
+Server::~Server() {
+    closeGameLoop();
+    closeAcceptor();
+    closeClients();
 }

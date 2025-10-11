@@ -17,6 +17,7 @@ class Server {
 public:
     explicit Server(const char* port);
     void run();
+    ~Server();
 private:
     MonitorClients monitorClients;
     Queue<std::string> messagesQueue;
