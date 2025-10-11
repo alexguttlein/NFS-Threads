@@ -43,7 +43,8 @@ namespace  Constants {
     // constantes de errores
     static const std::string ERROR_READN = "ERROR: Falta el número en read <n>";
     static const std::string ERROR_UNKNOWN_COMMAND = "Error: Comando desconocido: ";
-    static const std::string ERROR_PARAMETERS_QUANTITY = "Error: La cantidad de parametros no es correcta";
+    static const std::string ERROR_PARAMETERS_QUANTITY =
+        "Error: La cantidad de parametros no es correcta";
 
 }
 
