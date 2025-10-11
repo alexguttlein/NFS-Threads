@@ -1,8 +1,14 @@
-//
-// Created by alex on 10/10/25.
-//
+#ifndef COMMON_MESSAGE_H
+#define COMMON_MESSAGE_H
 
-#ifndef THREADS_2025C2_ALEXGUTTLEIN_COMMON_MESSAGE_H
-#define THREADS_2025C2_ALEXGUTTLEIN_COMMON_MESSAGE_H
+#include <cstdint>
 
-#endif  // THREADS_2025C2_ALEXGUTTLEIN_COMMON_MESSAGE_H
+#pragma pack(push, 1)  // para evitar padding
+struct Message {
+    uint8_t code;
+    uint16_t quantity;
+    uint8_t type;
+};
+#pragma pack(pop)
+
+#endif  // COMMON_MESSAGE_H

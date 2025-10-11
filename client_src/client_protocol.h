@@ -9,7 +9,7 @@
 #include <arpa/inet.h>
 
 #include "../common_src/common_constants.h"
-#include "../common_src/common_messageBuilder.h"
+#include "../common_src/common_message.h"
 #include "../common_src/common_queue.h"
 #include "../common_src/common_socket.h"
 

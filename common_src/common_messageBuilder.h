@@ -1,20 +1,19 @@
-#ifndef COMMON_MESSAGE_H
-#define COMMON_MESSAGE_H
+#ifndef COMMON_MESSAGEBUILDER_H
+#define COMMON_MESSAGEBUILDER_H
 
 #include <cstdint>
-
 #include <arpa/inet.h>
 
 #include "common_constants.h"
-// #include "common_message.h"
+#include "common_message.h"
 
-#pragma pack(push, 1)  // para evitar padding
-struct Message {
-    uint8_t code;
-    uint16_t quantity;
-    uint8_t type;
-};
-#pragma pack(pop)
+// #pragma pack(push, 1)  // para evitar padding
+// struct Message {
+//     uint8_t code;
+//     uint16_t quantity;
+//     uint8_t type;
+// };
+// #pragma pack(pop)
 
 class MessageBuilder {
 public:
@@ -30,4 +29,4 @@ private:
     void setType(const uint8_t& type);
 };
 
-#endif  // COMMON_MESSAGE_H
+#endif  // COMMON_MESSAGEBUILDER_H

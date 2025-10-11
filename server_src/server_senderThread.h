@@ -1,7 +1,7 @@
 #ifndef SERVER_SENDERTHREAD_H
 #define SERVER_SENDERTHREAD_H
 #include "../common_src/common_constants.h"
-#include "../common_src/common_messageBuilder.h"
+#include "../common_src/common_message.h"
 #include "../common_src/common_queue.h"
 #include "../common_src/common_socket.h"
 #include "../common_src/common_thread.h"
