@@ -5,12 +5,12 @@
 #include "../common_src/common_constants.h"
 
 int main(int argc, char* argv[]) {
-    if (argc < 2) {
-        std::cerr << "Error: La cantidad de parametros no es correcta" << std::endl;
+    if (argc < Constants::EXPECTED_SERVER_ARGC) {
+        std::cerr << Constants::ERROR_PARAMETERS_QUANTITY << std::endl;
         return Constants::ERROR;
     }
 
-    const char* port = argv[1];
+    const char* port = argv[Constants::PORT_SERVER_ARG_INDEX];
 
     Server server(port);
     server.run();

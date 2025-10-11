@@ -6,13 +6,13 @@
 #include "client_class.h"
 
 int main(int argc, char* argv[]) {
-    if (argc < 3) {
-        std::cerr << "Error: La cantidad de parametros no es correcta" << std::endl;
+    if (argc < Constants::EXPECTED_CLIENT_ARGC) {
+        std::cerr << Constants::ERROR_PARAMETERS_QUANTITY << std::endl;
         return Constants::ERROR;
     }
 
-    const char* host = argv[1];
-    const char* port = argv[2];
+    const char* host = argv[Constants::HOST_CLIENT_ARG_INDEX];
+    const char* port = argv[Constants::PORT_CLIENT_ARG_INDEX];
 
     try {
         Client client(host, port);

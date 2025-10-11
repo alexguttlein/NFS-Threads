@@ -17,7 +17,7 @@ void GameLoop::run() {
         // si algun nitro expiro se envia a los clientes
         checkNitroExpirationAndBroadcast(nitrosActivated);
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(250));
+        std::this_thread::sleep_for(std::chrono::milliseconds(Constants::THREAD_SLEEP_MS));
     }
 }
 
