@@ -20,7 +20,7 @@ void ClientProtocol::readMsg(int n) {
             return;
         socket.recvall(&msg, sizeof(msg));
 
-        msg.quantity = ntohs(msg.quantity);
+        // msg.quantity = ntohs(msg.quantity);
 
         if (msg.type == Constants::SERVER_NITRO_ACTIVATE) {
             msgQueue = Constants::MSG_NITRO_ON;

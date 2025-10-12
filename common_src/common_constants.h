@@ -45,6 +45,11 @@ namespace  Constants {
     static const std::string ERROR_UNKNOWN_COMMAND = "Error: Comando desconocido: ";
     static const std::string ERROR_PARAMETERS_QUANTITY =
         "Error: La cantidad de parametros no es correcta";
+    static const std::string ERROR_EXC_CAPTURADA_CLIENT_MAIN =
+        "Error: Excepción capturada en client_main: ";
+    static const std::string ERROR_EXC_CAPTURADA_SERVER_MAIN = "";
+    static const std::string ERROR_EXC_DESCONOCIDA_CLIENT_MAIN = "";
+    static const std::string ERROR_EXC_DESCONOCIDA_SERVER_MAIN = "";
 
 }
 

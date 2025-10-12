@@ -25,24 +25,6 @@ void Client::processInput(std::string input) {
     iss >> command;  // obtiene la primera palabra
 
     dispatcher.dispatch(command, iss);
-/*
-    if (command == Constants::INPUT_NITRO) {
-        protocol.sendNitro();
-    } else if (command == Constants::INPUT_READ) {
-        int n;
-        if (iss >> n) {
-            protocol.readMsg(n);
-            std::string msg;
-            for (int i = 0; i < n; i++) {
-                msg = clientQueue.pop();
-                std::cout << msg << std::endl;
-            }
-        } else {
-            std::cout << Constants::ERROR_READN << std::endl;
-        }
-    } else {
-        std::cout << Constants::ERROR_UNKNOWN_COMMAND << command << std::endl;
-    }*/
 }
 
 void Client::registerCommands() {
@@ -56,7 +38,7 @@ void Client::registerCommands() {
             protocol.readMsg(n);
             for (int i = 0; i < n; i++) {
                 std::string msg = clientQueue.pop();
-            std::cout << msg << std::endl;
+                std::cout << msg << std::endl;
             }
         } else {
             std::cout << Constants::ERROR_READN << std::endl;
