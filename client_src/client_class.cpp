@@ -4,8 +4,7 @@
 #include <ostream>
 
 Client::Client(const char* host, const char* port) :
-    clientQueue(Constants::CLIENT_QUEUE_MAXSIZE),
-    protocol(clientQueue, host, port) {
+    protocol(host, port) {
     registerCommands();
 }
 
@@ -35,9 +34,8 @@ void Client::registerCommands() {
     dispatcher.registerCommand(Constants::INPUT_READ, [&](std::istringstream& iss) {
         int n;
         if (iss >> n) {
-            protocol.readMsg(n);
             for (int i = 0; i < n; i++) {
-                std::string msg = clientQueue.pop();
+                std::string msg = protocol.readMsg();
                 std::cout << msg << std::endl;
             }
         } else {

@@ -1,8 +1,6 @@
 #include "client_protocol.h"
 
-ClientProtocol::ClientProtocol(Queue<std::string>& clientQueue,
-    const char* host, const char* port) :
-    clientQueue(clientQueue),
+ClientProtocol::ClientProtocol(const char* host, const char* port) :
     socket(host, port),
     isClosed(false) {}
 
@@ -11,24 +9,21 @@ void ClientProtocol::sendNitro() {
     socket.sendall(&msg, sizeof(msg));
 }
 
-void ClientProtocol::readMsg(int n) {
+std::string ClientProtocol::readMsg() {
     Message msg;
+    std::string response;
 
-    std::string msgQueue;
-    for (int i = 0; i < n; i++) {
-        if (socket.is_stream_recv_closed() || socket.is_stream_send_closed())
-            return;
-        socket.recvall(&msg, sizeof(msg));
+    if (socket.is_stream_recv_closed() || socket.is_stream_send_closed())
+        return "";
+    socket.recvall(&msg, sizeof(msg));
 
-        // msg.quantity = ntohs(msg.quantity);
-
-        if (msg.type == Constants::SERVER_NITRO_ACTIVATE) {
-            msgQueue = Constants::MSG_NITRO_ON;
-        } else if (msg.type == Constants::SERVER_NITRO_EXPIRED) {
-            msgQueue = Constants::MSG_NITRO_OFF;
-        }
-        clientQueue.push(msgQueue);
+    if (msg.type == Constants::SERVER_NITRO_ACTIVATE) {
+        response = Constants::MSG_NITRO_ON;
+    } else if (msg.type == Constants::SERVER_NITRO_EXPIRED) {
+        response = Constants::MSG_NITRO_OFF;
     }
+
+    return response;
 }
 
 ClientProtocol::~ClientProtocol() {

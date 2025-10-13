@@ -10,19 +10,16 @@
 
 #include "../common_src/common_constants.h"
 #include "../common_src/common_message.h"
-#include "../common_src/common_queue.h"
 #include "../common_src/common_socket.h"
 
 class ClientProtocol {
 public:
-    ClientProtocol(Queue<std::string>& clientQueue,
-        const char* host, const char* port);
+    ClientProtocol(const char* host, const char* port);
     void sendNitro();
-    void readMsg(int n);
+    std::string readMsg();
     ~ClientProtocol();
 
 private:
-    Queue<std::string>& clientQueue;
     Socket socket;
     bool isClosed;
 };

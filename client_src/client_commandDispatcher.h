@@ -10,7 +10,6 @@
 
 class CommandDispatcher {
 public:
-    // CommandDispatcher();
     void registerCommand(const std::string& name,
                          std::function<void(std::istringstream&)> handler);
 

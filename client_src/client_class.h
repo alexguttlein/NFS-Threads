@@ -6,7 +6,6 @@
 #include <string>
 
 #include "../common_src/common_constants.h"
-#include "../common_src/common_queue.h"
 #include "client_commandDispatcher.h"
 #include "client_protocol.h"
 
@@ -16,7 +15,6 @@ public:
     void processInput(std::string input);
     void run();
 private:
-    Queue<std::string> clientQueue;
     ClientProtocol protocol;
     CommandDispatcher dispatcher;
     void registerCommands();

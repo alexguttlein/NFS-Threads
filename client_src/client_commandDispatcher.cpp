@@ -1,7 +1,5 @@
 #include "client_commandDispatcher.h"
 
-// CommandDispatcher::CommandDispatcher() {}
-
 void CommandDispatcher::registerCommand(const std::string& name,
     std::function<void(std::istringstream&)> handler) {
 

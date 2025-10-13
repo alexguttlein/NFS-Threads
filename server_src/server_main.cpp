@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
 
         Server server(port);
         server.run();
-        
+
     } catch (const std::exception& e) {
         std::cerr << Constants::ERROR_EXC_CAPTURADA_SERVER_MAIN << e.what() << std::endl;
         return Constants::ERROR;
