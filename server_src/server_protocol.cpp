@@ -1,8 +1,5 @@
 #include "server_protocol.h"
 
-#include <iostream>
-#include <ostream>
-
 ServerProtocol::ServerProtocol(Socket socket) : socket(std::move(socket)) {}
 
 void ServerProtocol::sendMessage(const Message& msg) {
@@ -28,7 +25,7 @@ void ServerProtocol::close() {
         socket.shutdown(SHUT_RDWR);
     } catch (const LibError& e) {
         // si ya está desconectado no vuelvo a hacerle shutdown
-        std::cerr << "Socket shutdown warning: " << e.what() << std::endl;
+        std::cerr << Constants::SOCKET_SHUTDOWN_WARNING << e.what() << std::endl;
     }
     socket.close();
 }

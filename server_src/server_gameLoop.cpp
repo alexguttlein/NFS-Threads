@@ -54,3 +54,7 @@ void GameLoop::checkNitroExpirationAndBroadcast(int& nitrosActivated) {
 void GameLoop::stop() {
     running = false;
 }
+
+GameLoop::~GameLoop() {
+    running = false;
+}

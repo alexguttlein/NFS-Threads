@@ -9,7 +9,7 @@ Acceptor::Acceptor(const char* port, MonitorClients& clients,
 
 void Acceptor::run() {
     int id = 0;
-    while (keepAccepting && !socket.is_stream_recv_closed()) {
+    while (keepAccepting) {
         try {
             // se acepta un nuevo cliente
             Socket newSocket = socket.accept();
@@ -40,10 +40,19 @@ void Acceptor::addNewClient(int id, ClientData newClient) {
 
 void Acceptor::endAccepting() {
     keepAccepting = false;
-    close();
+    closeSocket();
 }
 
-void Acceptor::close() {
-    this->socket.shutdown(SHUT_RDWR);
-    this->socket.close();
+Acceptor::~Acceptor() {
+    endAccepting();
+    if (this->Thread::is_alive()) {
+        this->Thread::join();
+    }
+}
+
+void Acceptor::closeSocket() {
+    if (!socket.is_stream_recv_closed() && !socket.is_stream_send_closed()) {
+        this->socket.shutdown(SHUT_RDWR);
+        this->socket.close();
+    }
 }

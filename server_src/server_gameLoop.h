@@ -15,6 +15,7 @@ public:
     void checkNitroExpirationAndBroadcast(int& nitrosActivated);
     void unqueueAndBroadcastMsg(int& nitrosActivated);
     void stop() override;
+    ~GameLoop();
 private:
     Queue<std::string>& queue;
     MonitorClients& clients;

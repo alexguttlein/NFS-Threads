@@ -19,13 +19,14 @@ public:
     void addNewClient(int id, ClientData newClient);
     void run() override;
     void endAccepting();
+    ~Acceptor();
 
 private:
     Socket socket;
     MonitorClients& monitorClients;
     Queue<std::string>& queue;
     bool keepAccepting;
-    void close();
+    void closeSocket();
 };
 
 #endif  // SERVER_ACCEPTOR_H

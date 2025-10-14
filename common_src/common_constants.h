@@ -26,7 +26,7 @@ namespace  Constants {
     static const std::string INPUT_READ = "read";
     static const std::string INPUT_EXIT = "exit";
 
-    // constantes de mensajes
+    // constantes de mensajes del servidor
     static const std::string MSG_NITRO_ON = "A car hit the nitro!";
     static const std::string MSG_NITRO_OFF = "A car is out of juice.";
 
@@ -47,9 +47,14 @@ namespace  Constants {
         "Error: La cantidad de parametros no es correcta";
     static const std::string ERROR_EXC_CAPTURADA_CLIENT_MAIN =
         "Error: Excepción capturada en client_main: ";
-    static const std::string ERROR_EXC_CAPTURADA_SERVER_MAIN = "";
-    static const std::string ERROR_EXC_DESCONOCIDA_CLIENT_MAIN = "";
-    static const std::string ERROR_EXC_DESCONOCIDA_SERVER_MAIN = "";
+    static const std::string ERROR_EXC_CAPTURADA_SERVER_MAIN =
+        "Error: Excepción capturada en server_main: ";
+    static const std::string ERROR_EXC_DESCONOCIDA_CLIENT_MAIN =
+        "Error: Excepción desconocida en client_main: ";
+    static const std::string ERROR_EXC_DESCONOCIDA_SERVER_MAIN =
+        "Error: Excepción desconocida en server_main: ";
+    static const std::string SOCKET_SHUTDOWN_WARNING =
+        "Socket shutdown warning: ";
 
 }
 

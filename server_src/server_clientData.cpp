@@ -28,7 +28,7 @@ void ClientData::shutdown() {
             receiverThread = nullptr;
         }
 
-        // Recién ahora cerrás el socket
+        // se cierra el socket
         if (!serverProtocol.isConnectionClosed()) {
             serverProtocol.close();
         }

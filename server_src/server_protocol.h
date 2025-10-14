@@ -4,7 +4,10 @@
 #include "../common_src/common_socket.h"
 #include "../common_src/common_message.h"
 #include "../common_src/common_liberror.h"
+#include "../common_src/common_constants.h"
 
+#include <iostream>
+#include <ostream>
 #include <cstdint>
 #include <arpa/inet.h>
 #include <utility>
