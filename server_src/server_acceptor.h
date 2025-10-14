@@ -19,7 +19,6 @@ public:
     void addNewClient(int id, ClientData newClient);
     void run() override;
     void endAccepting();
-    ~Acceptor();
 
 private:
     Socket socket;

@@ -19,6 +19,7 @@ void Server::run() {
 
 void Server::closeAcceptor() {
     acceptor.endAccepting();
+    acceptor.join();
 }
 
 void Server::closeClients() {
